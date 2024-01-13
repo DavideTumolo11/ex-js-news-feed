@@ -43,14 +43,6 @@ const card = [
 ]
 
 
-
-
-
-
-
-
-
-
 function formatDate(dateStr) {
     const date = new Date(dateStr);
     return date.toLocaleDateString('it-IT');
@@ -71,7 +63,7 @@ function generateTags(tags) {
  * @returns object
  */
 function generateCard(card) {
-    
+
     return `<div class="card">
     <i class="fa-regular fa-bookmark"></i>
     <div class="container_title"><h2>${card.title}</h2></div>
@@ -112,25 +104,46 @@ function addCards(card, cardAddEl) {
 
 
 
-const colorBooks = document.querySelectorAll('.fa-bookmark');
+function checkBookmark() {
+    const colorBooks = document.querySelectorAll('.fa-bookmark');
 
-colorBooks.forEach(colorBook => {
-    colorBook.addEventListener('click', function(){
-        this.classList.replace('fa-regular', 'fa-solid');
+    colorBooks.forEach(colorBook => {
+        colorBook.addEventListener('click', function(e){
+            console.log(e);
+            this.classList.replace('fa-regular', 'fa-solid');
+            const isChecked = this.classList.contains('fa-solid') ? 'checked' : '';
+        });
     });
-});
+}
+
+checkBookmark();
 
 
-card.forEach(card => {
+
+const selectElement = document.getElementById('tag_type');
+const checkElement = document.getElementById('news');
+
+
+selectElement.addEventListener('change', function(e) {
+    console.log(e);
+} )
+
+
+
+
+
+
+
+
+
+/*card.forEach(card => {
     console.log(card);
 
     const { title, author, published, content, tags } = card
 
     console.log(title, author, published, content, tags);
 });
-
-
-
+*/
 
 
 
