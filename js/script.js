@@ -5,6 +5,7 @@ const card = [
         published: '2023-02-11',
         content: 'Un breve articolo sulla recente scoperta di una specie di papera di gomma mai vista prima',
         imgSrc: 'img/rubber-duck.jpg',
+        imgAlt: 'Una papera di gomma',
         tags: ['geo', 'tech'],
 
     },
@@ -14,6 +15,7 @@ const card = [
         published: '2023-03-14',
         content: 'Esplorando le profondità marine: il mistero degli abissi',
         imgSrc: 'img/deep-sea.jpg',
+        imgAlt: 'Profondità del mare',
         tags: ['viaggi', 'geo'],
 
     },
@@ -23,6 +25,7 @@ const card = [
         published: '2023-04-20',
         content: 'Esplorazione di tradizioni culinarie dimenticate e la ricerca di sapori autentici.',
         imgSrc: 'img/kitchen-food.jpg',
+        imgAlt: 'Pomodori con coltello e olio',
         tags: ['cucina'],
 
     },
@@ -32,6 +35,7 @@ const card = [
         published: '2023-05-29',
         content: "Un'analisi delle tendenze e delle sfide nell'arte contemporanea, con interviste a artisti emergenti.",
         imgSrc: 'img/modern-art.jpg',
+        imgAlt: 'Street art su muri per strada',
         tags: ['arte', 'tech'],
 
     }
@@ -75,7 +79,7 @@ function generateCard(card) {
     <h6>in data ${formatDate(card.published)}</h6>
     <p>${card.content}</p>
     <div class="cont_img">
-    <img src="${card.imgSrc}" alt="">
+    <img src="${card.imgSrc}" alt="${card.imgAlt}">
     </div>
     <div class="container_tag">
     ${generateTags(card.tags)}
@@ -112,12 +116,18 @@ const colorBooks = document.querySelectorAll('.fa-bookmark');
 
 colorBooks.forEach(colorBook => {
     colorBook.addEventListener('click', function(){
-        this.style.backgroundColor = 'blue';
+        this.classList.replace('fa-regular', 'fa-solid');
     });
 });
 
 
+card.forEach(card => {
+    console.log(card);
 
+    const { title, author, published, content, tags } = card
+
+    console.log(title, author, published, content, tags);
+});
 
 
 
