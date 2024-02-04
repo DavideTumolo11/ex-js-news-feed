@@ -47,10 +47,10 @@ function formatDate(dateStr) {
     const date = new Date(dateStr);
     return date.toLocaleDateString('it-IT');
 }
- 
+
 
 function generateTags(tags) {
-    
+
     return tags.map(tag => `<div class="tags ${tag}">${tag}</div>`).join('');
 }
 
@@ -108,10 +108,13 @@ function checkBookmark() {
     const colorBooks = document.querySelectorAll('.fa-bookmark');
 
     colorBooks.forEach(colorBook => {
-        colorBook.addEventListener('click', function(e){
-            console.log(e);
+        colorBook.addEventListener('click', function (e) {
+            //console.log(e);
             this.classList.replace('fa-regular', 'fa-solid');
             const isChecked = this.classList.contains('fa-solid') ? 'checked' : '';
+
+
+
         });
     });
 }
@@ -120,15 +123,18 @@ checkBookmark();
 
 
 
+
 const selectElement = document.getElementById('tag_type');
 const checkElement = document.getElementById('news');
 
 
-selectElement.addEventListener('change', function(e) {
-    console.log(e);
-} )
+selectElement.addEventListener('change', function (e) {
+    console.log(e.target.value);
+})
 
-
+checkElement.addEventListener('change', function (e) {
+    console.log(e.target.checked);
+})
 
 
 
@@ -143,8 +149,8 @@ selectElement.addEventListener('change', function(e) {
 
     console.log(title, author, published, content, tags);
 });
-*/
 
+*/
 
 
 
