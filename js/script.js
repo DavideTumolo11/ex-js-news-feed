@@ -109,16 +109,17 @@ function addCards(card, cardAddEl) {
 
 
 let isChecked = [];
+console.log(isChecked);
 
 function checkBookmark() {
     const colorBooks = document.querySelectorAll('.fa-bookmark');
 
-    colorBooks.forEach((colorBook, i) => {
+    colorBooks.forEach((colorBook, id) => {
         colorBook.addEventListener('click', function (e) {
             //console.log(e);
             this.classList.replace('fa-regular', 'fa-solid');
-            isChecked = this.classList.contains('fa-solid') ? 'checked' : '';
-
+            isChecked[id] = this.classList.contains('fa-solid',) ? 'checked' : '';
+            console.log(isChecked);
         });
     });
 }
@@ -128,12 +129,12 @@ checkBookmark();
 
 
 
+
+
 function apllyFilter() {
     let filteredCard = card;
-
     let selectTag = selectElement.value;
 
-    //console.log(selectTag);
     if (selectTag != 'all') {
         filteredCard = filteredCard.filter((card) => {
             return card.tags.includes(selectTag);
@@ -142,10 +143,11 @@ function apllyFilter() {
 
     let isCheckedEl = checkElement.checked;
     console.log(isCheckedEl);
-    if (isCheckedEl) {
 
-        //filteredCard = filteredCard.filter((card) => {})
-
+    if (isCheckedEl == true) {
+        filteredCard = filteredCard.filter((card) => {
+            return isChecked[card.id] === 'checked';
+        })
     }
 
 
@@ -155,9 +157,8 @@ function apllyFilter() {
 
 
 
-
 let allTags = card;
-console.log(allTags);
+
 
 const tags = ['politica', 'geo', 'tech', 'viaggi', 'cucina']
 const selectElement = document.getElementById('tag_type');
@@ -172,26 +173,5 @@ selectElement.addEventListener('change', function (e) {
 checkElement.addEventListener('change', function (e) {
     apllyFilter();
 
-    /*if (e.target.checked) {
-        allTags = allTags.filter(news => isChecked[news.id] === 'checked');
-    } else {
-        allTags = card;
-    }
-    console.log(allTags);
-    */
+
 })
-
-
-
-
-/*card.forEach(card => {
-    console.log(card);
-
-    const { title, author, published, content, tags } = card
-
-    console.log(title, author, published, content, tags);
-});
-
-*/
-
-
