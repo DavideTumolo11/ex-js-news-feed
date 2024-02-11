@@ -1,5 +1,6 @@
 const card = [
     {
+        id: 1,
         title: 'Scoperta di una nuova specie di papera di gomma',
         author: 'Diana Rossi',
         published: '2023-02-11',
@@ -10,6 +11,7 @@ const card = [
 
     },
     {
+        id: 2,
         title: 'Esplorando le profondità marine: il mistero degli abissi',
         author: 'Fabio Mari',
         published: '2023-03-14',
@@ -20,6 +22,7 @@ const card = [
 
     },
     {
+        id: 3,
         title: 'Viaggio culinario: alla ricerca dei sapori perduti',
         author: 'Marta Bianchi',
         published: '2023-04-20',
@@ -30,6 +33,7 @@ const card = [
 
     },
     {
+        id: 4,
         title: 'Arte moderna: oltre i confini convenzionali',
         author: 'Gabriele Neri',
         published: '2023-05-29',
@@ -94,6 +98,7 @@ addCards(card, cardAddEl);
  * @param {*} cardAddEl the node where append all icons
  */
 function addCards(card, cardAddEl) {
+    cardAddEl.innerHTML = '';
     card.forEach(card => {
         const cardHTML = generateCard(card);
 
@@ -103,17 +108,16 @@ function addCards(card, cardAddEl) {
 
 
 
+let isChecked = [];
 
 function checkBookmark() {
     const colorBooks = document.querySelectorAll('.fa-bookmark');
 
-    colorBooks.forEach(colorBook => {
+    colorBooks.forEach((colorBook, i) => {
         colorBook.addEventListener('click', function (e) {
             //console.log(e);
             this.classList.replace('fa-regular', 'fa-solid');
-            const isChecked = this.classList.contains('fa-solid') ? 'checked' : '';
-
-
+            isChecked = this.classList.contains('fa-solid') ? 'checked' : '';
 
         });
     });
@@ -124,20 +128,58 @@ checkBookmark();
 
 
 
+function apllyFilter() {
+    let filteredCard = card;
+
+    let selectTag = selectElement.value;
+
+    //console.log(selectTag);
+    if (selectTag != 'all') {
+        filteredCard = filteredCard.filter((card) => {
+            return card.tags.includes(selectTag);
+        })
+    }
+
+    let isCheckedEl = checkElement.checked;
+    console.log(isCheckedEl);
+    if (isCheckedEl) {
+
+        //filteredCard = filteredCard.filter((card) => {})
+
+    }
+
+
+    addCards(filteredCard, cardAddEl);
+}
+
+
+
+
+
+let allTags = card;
+console.log(allTags);
+
+const tags = ['politica', 'geo', 'tech', 'viaggi', 'cucina']
 const selectElement = document.getElementById('tag_type');
 const checkElement = document.getElementById('news');
 
 
 selectElement.addEventListener('change', function (e) {
-    console.log(e.target.value);
+    apllyFilter();
+
 })
 
 checkElement.addEventListener('change', function (e) {
-    console.log(e.target.checked);
+    apllyFilter();
+
+    /*if (e.target.checked) {
+        allTags = allTags.filter(news => isChecked[news.id] === 'checked');
+    } else {
+        allTags = card;
+    }
+    console.log(allTags);
+    */
 })
-
-
-
 
 
 
@@ -151,6 +193,5 @@ checkElement.addEventListener('change', function (e) {
 });
 
 */
-
 
 
