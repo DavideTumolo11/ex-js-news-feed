@@ -1,6 +1,6 @@
 const card = [
     {
-        id: 1,
+        id: 0,
         title: 'Scoperta di una nuova specie di papera di gomma',
         author: 'Diana Rossi',
         published: '2023-02-11',
@@ -11,7 +11,7 @@ const card = [
 
     },
     {
-        id: 2,
+        id: 1,
         title: 'Esplorando le profondità marine: il mistero degli abissi',
         author: 'Fabio Mari',
         published: '2023-03-14',
@@ -22,7 +22,7 @@ const card = [
 
     },
     {
-        id: 3,
+        id: 2,
         title: 'Viaggio culinario: alla ricerca dei sapori perduti',
         author: 'Marta Bianchi',
         published: '2023-04-20',
@@ -33,7 +33,7 @@ const card = [
 
     },
     {
-        id: 4,
+        id: 3,
         title: 'Arte moderna: oltre i confini convenzionali',
         author: 'Gabriele Neri',
         published: '2023-05-29',
@@ -67,9 +67,10 @@ function generateTags(tags) {
  * @returns object
  */
 function generateCard(card) {
+    const bookmarkClass = card.isChecked ? 'fa-solid' : 'fa-regular';
 
     return `<div class="card">
-    <i class="fa-regular fa-bookmark"></i>
+    <i class="${bookmarkClass} fa-bookmark"></i>
     <div class="container_title"><h2>${card.title}</h2></div>
     <h3>Publicato da ${card.author}</h3>
     <h6>in data ${formatDate(card.published)}</h6>
@@ -104,6 +105,8 @@ function addCards(card, cardAddEl) {
 
         cardAddEl.innerHTML += cardHTML;
     });
+
+    checkBookmark();
 }
 
 
@@ -118,13 +121,14 @@ function checkBookmark() {
         colorBook.addEventListener('click', function (e) {
             //console.log(e);
             this.classList.replace('fa-regular', 'fa-solid');
-            isChecked[id] = this.classList.contains('fa-solid',) ? 'checked' : '';
-            console.log(isChecked);
+            card[id].isChecked = true;
+            isChecked.push(id);
+
         });
     });
 }
 
-checkBookmark();
+
 
 
 
@@ -146,7 +150,7 @@ function apllyFilter() {
 
     if (isCheckedEl == true) {
         filteredCard = filteredCard.filter((card) => {
-            return isChecked[card.id] === 'checked';
+            return isChecked.includes(card.id);
         })
     }
 
